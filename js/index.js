@@ -5,9 +5,9 @@
 // wheel 5
 // dblclick 6
 // resize 7
-//beforeprint 8
-
-
+// beforeprint 8
+// Click 9
+// contextmenu 10
 
 
 // Logo heading event
@@ -18,10 +18,17 @@ logoHead.addEventListener('mouseout', (event) => logoHead.setAttribute('style', 
 // Navigation bar turns yellow
 let theBody = document.querySelector('body');
 let navBack = document.querySelector('nav');
+let navLink = document.querySelectorAll('.nav-link');
 theBody.addEventListener('keydown', (event) => {
-  navBack.setAttribute('style', 'background-color: #fdb349; padding: 10px 15px; color: white; border-radius: 10px; transition-duration: 300ms')}
-);
-theBody.addEventListener('keyup', (event) =>  navBack.setAttribute('style', 'background-color: none; padding: 0; color: black; border-radius: 0; transition-duration: 500ms'));
+  navBack.setAttribute('style', 'background-color: #fdb349; padding: 10px 15px; color: white; border-radius: 10px; transition-duration: 300ms');
+
+});
+theBody.addEventListener('keyup', (event) => { navBack.setAttribute('style', 'background-color:  none; padding: 0; color: black; border-radius: 0; transition-duration: 500ms');
+
+});
+theBody.addEventListener('click', () => {
+  theBody.style.background = 'lime';
+})
 
 //Wheel on images
 let content = document.querySelector('.content-section');
@@ -32,15 +39,39 @@ let headImg = document.querySelector('.intro img');
 let headImgBtn = document.querySelector('.intro h2');
 headImgBtn.innerHTML = 'Welcome To Fun Bus! <br> Double Click Me';
 headImgBtn.setAttribute('style', 'padding: 10px 20px; position: absolute; top: 30%; left: 35%; background: rgba(224, 181, 162, 0.5); border-radius: 20px; border: solid #fff 3px; text-align: center');
-headImgBtn.addEventListener('dblclick', () => headImg.setAttribute('src', 'https://picsum.photos/800/250'))
+headImgBtn.addEventListener('dblclick', () => headImg.setAttribute('src', 'https://picsum.photos/800/250'));
 
 // Image resize
 let imgFluid = document.querySelector('.img-fluid');
 window.addEventListener('resize', () => {
   imgFluid.setAttribute('style', 'transition-duration: 1s; max-width: 50%')
-})
+});
 
 // Before print
 window.addEventListener('beforeprint', () => {
   alert('Press okay to continue to print.')
-})
+});
+
+// Click
+let signUpClk = document.querySelectorAll('.btn');
+signUpClk.forEach((item, i) => {
+  item.addEventListener('click', (event) => {
+    event.stopPropagation();
+    item.style.background = 'black';
+  });
+});
+
+//contextmenu
+let noContext = document.querySelector('header');
+
+noContext.addEventListener('contextmenu', e => {
+  e.preventDefault();
+  alert('The header context menu has been disabled.')
+});
+
+// preventDefault
+navLink.forEach((item, i) => {
+  item.addEventListener('click', (event) => {
+    event.preventDefault();
+  })
+});
